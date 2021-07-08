@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <% if( typeof term !== 'undefined' ) { %>
+        <title><%=term%> - <%= process.env.TITLE %></title>
+    <% } else { %>
+    <title><%= process.env.TITLE %></title>
+    <% } %>
+
+    <style>
+        .news-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+        .card {
+            border: 0;
+            box-shadow: 3px 3px 3px #eee;
+        }
+        h2 {
+            font-weight: bold;
+            font-size: 22px;
+        }
+        .navbar-brand {
+            padding: 5px 10px;
+            background-color: #ff9800;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><%= process.env.TITLE %></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/">All News</a>
+                        <a class="nav-link" href="/bitcoin">Bitcoin</a>
+                        <a class="nav-link" href="/ethereum">Ethereum</a>
+                        <a class="nav-link" href="/binance">Binance</a>
+                        <a class="nav-link" href="/dogecoin">Dogecoin</a>
+                        <a class="nav-link" href="/xrp">XRP</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div style="height:62px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; text-align: right; line-height:14px; block-size:40px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; padding: 0px; margin: 0px; width: 100%;border-bottom: 1px solid #eee;">
+            <div style="height:40px; padding:0px; margin:0px; width: 100%;">
+                <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="news-section mt-5">
+            <h2>
+                <span>TODAY'S FEATURED NEWS</span>
+                <% if( typeof term !== 'undefined' ) { %>
+                    <span>FOR "<%= term %>"</span>
+                <% } %>
+            </h2>
+
+            <div class="row">
+                <% if(articles.length > 0) { %>
+                    <% articles.forEach((article, index) => { %>
+                    <div class="col-4 mb-5">
+                        <div class="card">
+                            <img class="news-image" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" src="<%=article.urlToImage%>" class="card-img-top" alt="<%=article.title%>">
+                            <div class="card-body">
+                                <p class="mb-1">Source: <%= article.source.name %></p>
+                                <h5 class="card-title"><%=article.title%></h5>
+                                <p class="card-text"><%=article.description.substr(0, 100)%></p>
+                                <a href="<%=article.url%>" target="_blank" class="btn btn-dark w-100 float-right">READ THE NEWS</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="col-12">
+                        <p class="notfound">No news found.</p>
+                    </div>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
