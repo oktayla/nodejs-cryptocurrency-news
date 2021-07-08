@@ -1,6 +1,6 @@
 # CRYPTOCURRENCY NEWS APP
 
-```:warning: ️NEWSAPI.ORG API_KEY REQUIRED```
+```⚠️ ️NEWSAPI.ORG API_KEY REQUIRED```
 
 first clone repository, then
 ```
