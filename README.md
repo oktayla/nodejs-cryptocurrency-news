@@ -13,3 +13,6 @@ npm start
 -   ejs
 -   nodemon
 -   express
+
+### Screenshot
+![Screenshot](https://raw.githubusercontent.com/oktayla/nodejs-cryptocurrency-news/main/Screenshot.png)
